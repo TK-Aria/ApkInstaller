@@ -1,9 +1,9 @@
 //
 // @file main.cpp
-// @brief ŠÈ’P‚Èà–¾
-// @author ì¬Ò
-// @date ì¬“ú
-// @details Ú×‚Èà–¾
+// @brief ï¿½È’Pï¿½Èï¿½
+// @author ï¿½ì¬ï¿½ï¿½
+// @date ï¿½ì¬ï¿½ï¿½
+// @details ï¿½Ú×‚Èï¿½
 //
 #pragma once
 
@@ -11,21 +11,26 @@
 
 	template<class X> class ValueChangedNotifier
 	{
-	public:
+	private:
+
 		X lastValue;
+
+	public:
 		X currentValue;
 		bool valueChanged;
+
+		ValueChangedNotifier() = default;
 
 		void Observe(X newValue)
 		{
 
-			// ’l‚ª•Ï‚í‚Á‚½‚Æ‚«.
+			// ï¿½lï¿½ï¿½ï¿½Ï‚ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½.
 			if (valueChanged = (lastValue == newValue))
 			{
-				// ‰½‚©‚·‚é.
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 			}
 
-			// V‚µ‚¢ƒtƒŒ[ƒ€ƒf[ƒ^‚ğŠi”[.
+			// ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½ï¿½iï¿½[.
 			lastValue = currentValue;
 			currentValue = newValue;
 			setvbuf()
@@ -46,7 +51,7 @@ class EventTrigger
 
 };
 
-// sistem‚È‚Ç‚É’Ê’m‚·‚é.
+// sistemï¿½È‚Ç‚É’Ê’mï¿½ï¿½ï¿½ï¿½.
 class EventNotifier
 {
 
@@ -69,35 +74,35 @@ class GameSystemModel
 
 class GameService
 {
-	// ƒCƒxƒ“ƒg‚ğÙ‚­
-	// system‚Ì‰Šú‰»AXVAI—¹
+	// ï¿½Cï¿½xï¿½ï¿½ï¿½gï¿½ï¿½Ù‚ï¿½
+	// systemï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Xï¿½Vï¿½Aï¿½Iï¿½ï¿½
 };
 
 // base class
 class GameUnit
 {
 	// Parameter;
-	// view ‚Ç‚ñ‚ÈŒ©‚½–Ú‚ğ‚µ‚Ä‚¢‚é‚©B
-	// ‚Ç‚ñ‚È‚¤‚²‚«‚ğ‚·‚é‚Ì‚©H
+	// view ï¿½Ç‚ï¿½ÈŒï¿½ï¿½ï¿½ï¿½Ú‚ï¿½Ä‚ï¿½ï¿½é‚©ï¿½B
+	// ï¿½Ç‚ï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚ï¿½ï¿½H
 };
 
-//  “Áê‚ÈƒQ[ƒ€ƒ†ƒjƒbƒg.
+//  ï¿½ï¿½ï¿½ï¿½ÈƒQï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½jï¿½bï¿½g.
 class GameMaster : public GameUnit
 {
 	
 };
 
-//•W€o—Í‚É‚Ó‚Á‚­
+//ï¿½Wï¿½ï¿½ï¿½oï¿½Í‚É‚Ó‚ï¿½ï¿½ï¿½
 #include <stdio.h>
 // setvbuf(stdout, buff, _IOFBF, sizeof(buff));
 
-// electon‚ÌƒRƒ}ƒ“ƒhˆø”ˆ—‚ÌİŒv
+// electonï¿½ÌƒRï¿½}ï¿½ï¿½ï¿½hï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÌİŒv
 
 
 #include <typeinfo>
 #define ToString(type) typeid(type).name
 
-// I—¹‚ÉŒÄ‚ÔŠÖ”‚ğ32ŒÂ“o˜^‚Å‚«‚éB
+// ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ÉŒÄ‚ÔŠÖï¿½ï¿½ï¿½32ï¿½Â“oï¿½^ï¿½Å‚ï¿½ï¿½ï¿½B
 #include <cstdlib>
 // atexit()
 
@@ -105,7 +110,7 @@ class GameMaster : public GameUnit
 namespace Seed
 {
 
-	// ƒ‰ƒ“ƒ^ƒCƒ€ã‚Éˆê‘Ì‚µ‚©‘¶İ‚Å‚«‚È‚¢B
+	// ï¿½ï¿½ï¿½ï¿½ï¿½^ï¿½Cï¿½ï¿½ï¿½ï¿½Éˆï¿½Ì‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ‚Å‚ï¿½ï¿½È‚ï¿½ï¿½B
 	class FinalizeManager /* : DesignPattern::Singleton */
 	{
 
@@ -129,7 +134,7 @@ namespace Seed::MemoryManagement
 
 	};
 
-	// ‹^—“I‚ÈƒKƒx[ƒWƒRƒŒƒNƒVƒ‡ƒ“‚ÌİŒv.
+	// ï¿½^ï¿½ï¿½ï¿½Iï¿½ÈƒKï¿½xï¿½[ï¿½Wï¿½Rï¿½ï¿½ï¿½Nï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ÌİŒv.
 	class SeedMemoryManagementAttribute IGarbageCollection
 	{
 
@@ -157,7 +162,7 @@ namespace Seed::Graphics
 
 	class SeedGraphicsAttribute GraphicsRendererManager
 	{
-		// renderer‚©‚çrendererhandle‚Ö‚ÌƒoƒCƒ“ƒh‚È‚Ç.
+		// rendererï¿½ï¿½ï¿½ï¿½rendererhandleï¿½Ö‚Ìƒoï¿½Cï¿½ï¿½ï¿½hï¿½È‚ï¿½.
 	};
 
 	class SeedGraphicsAttribute GraphicsRenderer
