@@ -11,6 +11,7 @@ cmake_minimum_required(VERSION 2.8)
 add_difinitions(-std=c++11)
 
 add_executable(ApkInstaller main.cpp)
+add_library(ApkInstaller main.cpp)
 
 
 # ソリューションファイルの名前を指定する
