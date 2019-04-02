@@ -1,17 +1,25 @@
 //
-// @file main.cpp
-// @brief ŠÈ’P‚Èà–¾
-// @author ì¬Ò
-// @date ì¬“ú
-// @details Ú×‚Èà–¾
+//!		@file main.cpp
+//!		@brief ï¿½È’Pï¿½Èï¿½
+//!		@author ï¿½ì¬ï¿½ï¿½
+//!		@date ï¿½ì¬ï¿½ï¿½
+//!		@details ï¿½Ú×‚Èï¿½
 //
 #pragma once
 
 #define CEREAL_THREAD_SAFE 1
 #include <cereal/cereal.hpp>
 #include <cereal/archives/json.hpp>
-#include <cereal/types/vector.hpp>
 
+#include <cereal/types/string.hpp>
+#include <cereal/types/vector.hpp>
+#include <cereal/types/list.hpp>
+#include <cereal/types/unordered_map.hpp>
+
+//! Jsonï¿½ÏŠï¿½ï¿½ï¿½ï¿½È‚Ç‚É•Ïï¿½ï¿½ï¿½ï¿½ï¿½Û‘ï¿½ï¿½ï¿½ï¿½ï¿½.
+#define SerializeProperty CEREAL_NVP
+
+//! ï¿½Vï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Cï¿½Yï¿½Ìƒoï¿½[ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½Ç—ï¿½ï¿½È‚ï¿½.
 #define SerializableClassProperty CEREAL_CLASS_VERSION
 
 
