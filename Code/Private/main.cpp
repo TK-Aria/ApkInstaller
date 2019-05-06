@@ -50,8 +50,8 @@ int main(int argc, const char * argv[])
 		GetCurrentDirectory(currentDirectory, MAX_BUFF);
 
 		cout << "[ Current Directory ] : " << currentDirectory << endl;
-		cout << "[ App Directory ] : " << appPath << endl;
-
+		cout << "[ App Directory ] : " << appPath << endl;        
+        
 		// change current directory.
 		ChangeDirectory(appPath.data());
 	}
@@ -66,12 +66,14 @@ int main(int argc, const char * argv[])
 	if(commandParameter->argv[1])
 	{ 
 
-		char fileExtension[MAX_BUFF] = {};
+		//char fileExtension[MAX_BUFF] = {};
+        std::string fileExtension;
 		cout << "[ CommandParameter ] : " << commandParameter->argv[1] << endl;
-		_splitpath(commandParameter->argv[1], nullptr, nullptr, nullptr, fileExtension);
-		cout << "[ FileExtension ] : " << fileExtension << endl;
+		//_splitpath(commandParameter->argv[1], nullptr, nullptr, nullptr, fileExtension);
+        GetFileExtension(fileExtension,commandParameter->argv[1]);
+        cout << "[ FileExtension ] : " << fileExtension.data() << endl;
 
-		if (strcmp(fileExtension, ".apk") == 0)
+		if (strcmp(fileExtension.data(), ".apk") == 0)
 		{
 			string fullpath = commandParameter->argv[1];
 			string command(ADB_COMMAND + fullpath);
