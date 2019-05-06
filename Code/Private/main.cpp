@@ -1,8 +1,8 @@
 //
 //  main.cpp
-//  EasyApkInstaller
+//  ApkInstaller
 //
-//  Created by tkaria on 2018/10/24.
+//  Created by tkaria on 2018/03/16.
 //  Copyright © 2018年 tkaria. All rights reserved.
 //
 
