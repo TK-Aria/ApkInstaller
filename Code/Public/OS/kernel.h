@@ -15,6 +15,8 @@
 #define GetCurrentDirectory(dir,size) GetCurrentDirectoryA(size,dir)
 #define ChangeDirectory SetCurrentDirectoryA
 
+#define ADB_COMMAND "adb install -r "
+
 // UNIX OS
 #else __unix__|__linux__|__FreeBSD__|__NetBSD__
 
@@ -23,6 +25,8 @@
 
 #define GetCurrentDirectory getcwd
 #define ChangeDirectory chdir
+
+#define ADB_COMMAND "./adb install -r "
 
 #endif // OS Dependence
 

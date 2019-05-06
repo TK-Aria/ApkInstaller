@@ -40,18 +40,21 @@ int main(int argc, const char * argv[])
 	static char rcvBuffer[8192] = { 0 };
 	setvbuf(stdout, rcvBuffer, _IOFBF, sizeof(rcvBuffer));
 
-    // get application path.
-    auto appPath = SearchPathFromCommandArg( ApplicationName, *commandParameter );
-    
-    // confirm current directory.
-    char currentDirectory[ MAX_BUFF ] = { 0 };
-	GetCurrentDirectory( currentDirectory, MAX_BUFF );
-    
-    cout << "[ Current Directory ] : " << currentDirectory << endl;
-    cout << "[ App Directory ] : " << appPath << endl;
-    
-    // change current directory.
-    ChangeDirectory(appPath.data());
+	{ // Directory Operation .
+
+		// get application path.
+		auto appPath = SearchPathFromCommandArg(ApplicationName, *commandParameter);
+
+		// confirm current directory.
+		char currentDirectory[MAX_BUFF] = { 0 };
+		GetCurrentDirectory(currentDirectory, MAX_BUFF);
+
+		cout << "[ Current Directory ] : " << currentDirectory << endl;
+		cout << "[ App Directory ] : " << appPath << endl;
+
+		// change current directory.
+		ChangeDirectory(appPath.data());
+	}
 
 	ApkInstallCommandParameter param;
 	{
@@ -59,49 +62,74 @@ int main(int argc, const char * argv[])
 		param.bundleName = "com.Default.Company";
 	}
 
-	/*
 
-	// Archive parameter.
-	stringstream strStream;
-	{
-		JSONOutputArchive jsonSerializer(strStream);
-		jsonSerializer(param);
+	if(commandParameter->argv[1])
+	{ 
+
+		char fileExtension[MAX_BUFF] = {};
+		cout << "[ CommandParameter ] : " << commandParameter->argv[1] << endl;
+		_splitpath(commandParameter->argv[1], nullptr, nullptr, nullptr, fileExtension);
+		cout << "[ FileExtension ] : " << fileExtension << endl;
+
+		if (strcmp(fileExtension, ".apk") == 0)
+		{
+			string fullpath = commandParameter->argv[1];
+			string command(ADB_COMMAND + fullpath);
+			system(command.data());
+		}
+
 	}
-	cout << "[ Json ] : " << strStream.str() << endl;
-
-	auto fileHandle = fopen(JSON_FILE_NAME, "wb+");
-	{
-		fwrite(strStream.str().data(), strStream.str().size(),1, fileHandle);
-	}
-	fclose(fileHandle);
-
-	*/
-
-	// Deserialize parameter
-	stringstream strStream;
-	char* streamBuffer = nullptr;
-	FILE* fileHandle = nullptr;
-	if(fileHandle = fopen(JSON_FILE_NAME, "rb+"))
+	else
 	{
 
-		unsigned int buffSize = fseek(fileHandle, 0, SEEK_END);
-		streamBuffer = new char[MAX_BUFF] { 0 };
-		fseek(fileHandle, 0, SEEK_SET);
+		/*
 
-		fread(streamBuffer, MAX_BUFF, 1, fileHandle);
+		// Archive parameter.
+		stringstream strStream;
+		{
+			JSONOutputArchive jsonSerializer(strStream);
+			jsonSerializer(param);
+		}
+		cout << "[ Json ] : " << strStream.str() << endl;
 
-		strStream << streamBuffer;
-
+		auto fileHandle = fopen(JSON_FILE_NAME, "wb+");
+		{
+			fwrite(strStream.str().data(), strStream.str().size(),1, fileHandle);
+		}
 		fclose(fileHandle);
+
+		*/
+
+		// Deserialize parameter
+		stringstream strStream;
+		char* streamBuffer = nullptr;
+		FILE* fileHandle = nullptr;
+		if (fileHandle = fopen(JSON_FILE_NAME, "rb+"))
+		{
+
+			unsigned int buffSize = fseek(fileHandle, 0, SEEK_END);
+			streamBuffer = new char[MAX_BUFF] { 0 };
+			fseek(fileHandle, 0, SEEK_SET);
+
+			fread(streamBuffer, MAX_BUFF, 1, fileHandle);
+
+			strStream << streamBuffer;
+
+			fclose(fileHandle);
+		}
+
+		cout << "[ Json ] : " << strStream.str() << endl;
+
+		JSONInputArchive jsonDesirializer(strStream);
+		jsonDesirializer(param);
+
+		delete streamBuffer;
+
+		// invoke apkinstall command.
+		string command(ADB_COMMAND + param.fileName);
+		system(command.data());
+
 	}
-
-	cout << "[ Json ] : " << strStream.str() << endl;
-
-	JSONInputArchive jsonDesirializer(strStream);
-	jsonDesirializer(param);
-
-	delete streamBuffer;
-
 
 	rewind(stdin);
 	getchar();
@@ -113,8 +141,6 @@ int main(int argc, const char * argv[])
     //read_json(JSON_FILE_NAME, json);
     
     
-    // invoke apkinstall command.
-
 	delete commandParameter;
     
     return 0;
