@@ -32,4 +32,12 @@ build_document:
 .PHONY: build_installer
 build_installer:
 
+.PHONY: setup_author
+setup_author:
+	git config list 
+	git config user.name "t.k-aria"
+	git config user.email "activestaffsunite.t.k.aria@gmail.com"
+	git log --pretty=fuller
+	git filter-branch -f --env-filter "GIT_AUTHOR_NAME='t.k-aria' GIT_AUTHOR_EMAIL='activestaffsunite.t.k.aria@gmail.com'; GIT_COMMITTER_NAME='t.k-aria'; GIT_COMMITTER_EMAIL='activestaffsunite.t.k.aria@gmail.com';" HEAD 
+	git log --pretty=fuller
 
