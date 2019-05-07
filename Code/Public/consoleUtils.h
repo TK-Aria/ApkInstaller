@@ -1,9 +1,9 @@
 //
 // @file main.cpp
-// @brief ŠÈ’P‚Èà–¾
-// @author ì¬Ò
-// @date ì¬“ú
-// @details Ú×‚Èà–¾
+// @brief ç°¡å˜ãªèª¬æ˜
+// @author ä½œæˆè€…
+// @date ä½œæˆæ—¥
+// @details è©³ç´°ãªèª¬æ˜
 //
 #pragma once
 
@@ -19,7 +19,7 @@ String SearchPathFromCommandArg( const String& searchTarget, CommnadParameter& p
 	const int AppPathIndex = 0;
 
 	String appPath = param.argv[AppPathIndex];
-	auto pos = appPath.find(searchTarget.data());
+	auto pos = appPath.find_last_of(searchTarget.data());
 	appPath.replace(pos, searchTarget.length(), "");
 
 	return appPath;
