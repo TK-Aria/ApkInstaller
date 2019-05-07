@@ -12,7 +12,7 @@ I'm making it easy to install the apk file.
 ### -- About Configurate Application Setting parameter --
 * Windows Application
     1. Edit config.json
-    2. Drag&Drop to 'apk' file
+    2. Drag&Drop to 'apk' file ~~or 'apk' file and 'androidManifest.xml' file~~.
 
 * MacOSX Application 
     1. Edit config.json 
