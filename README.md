@@ -35,6 +35,7 @@ I'm making it easy to install the apk file.
 * Top
     * [Introduce](./Document/Introduce.md)
     * [Todo](./Document/Todo.md)
+    * [Developer](./Document/Developer.md)
     * [Reference](./Document/Reference.md)
 
 ## Licence
