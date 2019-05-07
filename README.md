@@ -9,7 +9,7 @@ I'm making it easy to install the apk file.
 1. configurate application setting parameter.
 2. double click to ApkInstaller(application).
 
-### About Configurate Application Setting parameter
+### -- About Configurate Application Setting parameter --
 * Windows Application
     1. Edit config.json
     2. Drag&Drop to 'apk' file
@@ -17,7 +17,7 @@ I'm making it easy to install the apk file.
 * MacOSX Application 
     1. Edit config.json 
 
-### About Edit 'config.json'
+### -- About Edit 'config.json' --
 * config.json
     * ${YourApkFileName} : example ("package.apk")
     * ${YourBundleName} : example ("com.Default.Company")
