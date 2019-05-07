@@ -6,7 +6,10 @@ apkInstaller is native applicaion tool.
 I'm making it easy to install the apk file.
 
 ## How to use this Application
+1. configurate application setting parameter.
+2. double click to ApkInstaller(application).
 
+### About Configurate Application Setting parameter
 * Windows Application
     1. Edit config.json
     2. Drag&Drop to 'apk' file
