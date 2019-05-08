@@ -3,7 +3,7 @@ apkファイルをエンジニア以外でも簡単にインストールする�
 
 ## What's the ApkInstaller?
 apkInstaller is native applicaion tool.  
-I'm making it easy to install the apk file.
+it is easy to install the apk file.
 
 ## How to use this Application
 1. configurate application setting parameter.
