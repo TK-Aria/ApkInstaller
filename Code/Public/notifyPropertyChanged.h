@@ -9,7 +9,7 @@
 
 //namespace Seed::Utillity {
 
-	template<class X> class ValueChangedNotifier
+	template<class X> class NotifyPropertyChanged
 	{
 	private:
 
