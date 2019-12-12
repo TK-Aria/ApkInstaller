@@ -32,10 +32,18 @@ jobs:
         cmakeArgs: >
             -DCMAKE_INSTALL_PREFIX=$(Build.ArtifactStagingDirectory)
             $(Build.SourcesDirectory)
+            
     - task: CMake@1
       displayName: 'cmake install'
       inputs:
         cmakeArgs: >
              --build ./
              --target install
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: drop'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
 
