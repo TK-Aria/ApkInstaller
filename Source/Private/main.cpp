@@ -20,7 +20,70 @@
 #include "../Public/consoleUtils.h"
 #include "../Public/apkInstallCommand.h"
 
+/*
+namespace Seed::Runtime::Service
+{
 
+	class Singleton;
+	class LibraryCtrlManager;
+
+
+#if defined(SEED_WIN32) | defined(SEED_UWP)
+	#include <windows.h> // http://yamatyuu.net/computer/program/sdk/base/dynamic_dll/index.html
+// ex)
+//        HMODULE hMod = LoadLibrary(L"user32.dll");
+//		if (hMod == NULL)
+//		{
+//          return 1;
+//      }
+//		MessageBoxWFunc func=0;
+//        func = (MessageBoxWFunc)GetProcAddress(hMod, "MessageBoxW");
+//        if (func)
+//                (*func)(0, L"MessageBoxの呼び出しに成功しました", L"メッセージ", MB_OK);
+//        FreeLibrary(hMod);
+//        return (int)0;
+//
+#elif defined(SEED_OSX) | defined(SEED_LINUX)
+	#include <dlfcn.h> // https://brightenfuture.com/blog/shared-lib-linux/
+// ex)
+//		void *ptrHandle = dlopen("shared.so", RTLD_LAZY);
+//		HOGE_FUNCTION ptrDllFunc = (void (*)(void))dlsym(ptrHandle, "hoge");
+//		ptrDllFunc();
+//
+#endif 
+
+	/// <summary>
+	///  アプリケーションの抽象クラス. https://www.gesource.jp/programming/bcb/dll/03.html
+	/// </summary>
+	class SEED_SERVICE_API AppService : public Singleton<AppService>
+	{
+		DisAllowCopyAndAssign(AppService);
+
+	private:
+
+	public:
+		void Initialize();
+		void Shutdown();
+		void Update();
+
+		void SubProcess(char* param, char* output = stdout)
+		{
+			system(param);
+		}
+
+		void LoadLibrary()
+		{
+			LibraryCtrlManager.LoadLibrary();
+		}
+
+		void UnloadLibrary()
+		{
+			LibraryCtrlManager.UnloadLibrary();
+		}
+	};
+
+}
+*/
 int main(int argc, const char * argv[])
 {
 

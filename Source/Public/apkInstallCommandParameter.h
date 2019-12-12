@@ -1,14 +1,30 @@
 //
 // @file main.cpp
-// @brief ŠÈ’P‚Èà–¾
-// @author ì¬Ò
-// @date ì¬“ú
-// @details Ú×‚Èà–¾
+// @brief ï¿½È’Pï¿½Èï¿½ï¿½ï¿½
+// @author ï¿½ì¬ï¿½ï¿½
+// @date ï¿½ì¬ï¿½ï¿½
+// @details ï¿½Ú×‚Èï¿½ï¿½ï¿½
 //
 #pragma once
 
 #include "serializeSupport.h"
 
+#define SerializableProperty(property)
+
+/*
+namespace Seed::Core::Implement::Serialization
+{
+
+	class SEED_IMPLEMENT_API SerializableObject
+	{
+		DisAllowCopyAndAssign(SerializableObject);
+	private:
+
+	public:
+	};
+
+}
+*/
 
 struct ApkInstallCommandParameter
 {
@@ -22,7 +38,7 @@ struct ApkInstallCommandParameter
 
 		if (1 <= version)
 		{
-			// ‰½‚©‚·‚é.
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 		}
 	}
 
