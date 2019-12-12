@@ -13,8 +13,8 @@ jobs:
       displayName: 'cmake configure'
       inputs:
         cmakeArgs: >
-            -DCMAKE_INSTALL_PREFIX=${Build.ArtifactStagingDirectory}
-            ${Build.SourcesDirectory}
+            -DCMAKE_INSTALL_PREFIX=$(Build.ArtifactStagingDirectory)
+            $(Build.SourcesDirectory)
     - task: CMake@1
       displayName: 'cmake install'
       inputs:
@@ -30,8 +30,8 @@ jobs:
       displayName: 'cmake configure'
       inputs:
         cmakeArgs: >
-            -DCMAKE_INSTALL_PREFIX=${Build.ArtifactStagingDirectory}
-            ${Build.SourcesDirectory}
+            -DCMAKE_INSTALL_PREFIX=$(Build.ArtifactStagingDirectory)
+            $(Build.SourcesDirectory)
     - task: CMake@1
       displayName: 'cmake install'
       inputs:
