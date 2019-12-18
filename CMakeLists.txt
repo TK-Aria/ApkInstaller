@@ -24,12 +24,12 @@ include_directories("${INCLUDE_DIRECTORIES}")
 # )
 
 # 
-#add_library(apkInst SHARED Source/private/dllMain.cxx)
+#add_library(apkInst SHARED Source/Private/dllMain.cxx)
 #install(TARGETS apkInst RUNTIME DESTINATION bin)
 
 # 
-add_executable(ApkInstaller Source/private/main.cpp)
-#add_library(ApkInstaller Source/private/main.cpp)
+add_executable(ApkInstaller Source/Private/main.cpp)
+#add_library(ApkInstaller Source/Private/main.cpp)
 
 install(TARGETS ApkInstaller RUNTIME DESTINATION bin/OSX)
 
