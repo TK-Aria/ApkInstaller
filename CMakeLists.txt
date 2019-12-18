@@ -25,7 +25,12 @@ include_directories("${INCLUDE_DIRECTORIES}")
 
 # 
 add_library(apkInst SHARED Source/Private/dllMain.cxx)
-install(TARGETS apkInst RUNTIME DESTINATION bin)
+install(
+    TARGETS apkInst
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    COMPONENT library
+    RUNTIME DESTINATION bin)
 
 # 
 add_executable(ApkInstaller Source/Private/main.cpp)
