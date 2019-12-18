@@ -3,7 +3,33 @@
 trigger:
 - master
 
+
 jobs:
+- job: linux_build
+    displayName: linux build
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: CMake@1
+      displayName: 'cmake configure'
+      inputs:
+        cmakeArgs: >
+            -DCMAKE_INSTALL_PREFIX=$(Build.ArtifactStagingDirectory)
+            $(Build.SourcesDirectory)
+    - task: CMake@1
+      displayName: 'cmake install'
+      inputs:
+        cmakeArgs: >
+             --build ./
+             --target install
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: download'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'download'
+        publishLocation: 'Container'
+
+
   - job: macos_build
     displayName: macos build
     pool:
@@ -22,10 +48,10 @@ jobs:
              --build ./
              --target install
     - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact: drop'
+      displayName: 'Publish Artifact: download'
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'drop'
+        ArtifactName: 'download'
         publishLocation: 'Container'
 
 
@@ -38,6 +64,7 @@ jobs:
       displayName: 'cmake configure'
       inputs:
         cmakeArgs: >
+            -DCMAKE_USE_RELATIVE_PATHS=ON
             -DCMAKE_INSTALL_PREFIX=$(Build.ArtifactStagingDirectory)
             $(Build.SourcesDirectory)
             
@@ -49,9 +76,9 @@ jobs:
              --target install
 
     - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact: drop'
+      displayName: 'postprocess: binary artifact'
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'drop'
+        ArtifactName: 'download'
         publishLocation: 'Container'
 
