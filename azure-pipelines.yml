@@ -4,6 +4,44 @@ trigger:
 - master
 
 jobs:
+
+  - job: doxygen_build
+    displayName: script reference build
+    pool:
+      vmImage: 'ubuntu-16.04'
+    steps:
+    - task: CMake@1
+      displayName: 'cmake version'
+      inputs:
+        cmakeArgs: >
+            --version
+    
+    - task: CMake@1
+      displayName: 'cmake configure'
+      inputs:
+        cmakeArgs: >
+            -DCMAKE_INSTALL_PREFIX=$(Build.ArtifactStagingDirectory)
+            $(Build.SourcesDirectory)
+    - task: CMake@1
+      displayName: 'cmake install'
+      inputs:
+        cmakeArgs: >
+             --build ./
+             --target install
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: download'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'download'
+        publishLocation: 'Container'
+        
+    - task: PublishBuildArtifacts@1
+      displayName: 'postprocess: project artifact'
+      inputs:
+        PathtoPublish: '$(Build.SourcesDirectory)'
+        ArtifactName: 'project'
+        publishLocation: 'Container'
+
   - job: linux_build
     displayName: linux build
     pool:
