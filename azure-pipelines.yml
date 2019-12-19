@@ -13,24 +13,14 @@ jobs:
     - task: CmdLine@2
       inputs:
         script: |
-          echo Write your commands here
-          echo Hello world
-          pwd
-          ls
           sudo apt-get install doxygen doxygen-gui graphviz
           doxygen
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact: download'
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'download'
-        publishLocation: 'Container'
         
     - task: PublishBuildArtifacts@1
       displayName: 'postprocess: project artifact'
       inputs:
-        PathtoPublish: '$(Build.SourcesDirectory)'
-        ArtifactName: 'project'
+        PathtoPublish: '$(Build.SourcesDirectory)/html'
+        ArtifactName: 'ScriptReference'
         publishLocation: 'Container'
 
   - job: linux_build
@@ -149,4 +139,22 @@ jobs:
         ArtifactName: 'project'
         publishLocation: 'Container'
         
-        
+  - job: ios_build
+    displayName: ios build
+    pool:
+      vmImage: 'macos-latest'
+    steps:
+    - task: CmdLine@2
+      inputs:
+        script: |
+          echo feature supported ios
+  
+  - job: android_build
+    displayName: android build
+    pool:
+      vmImage: 'macos-latest'
+    steps:
+    - task: CmdLine@2
+      inputs:
+        script: |
+          echo feature supported android
