@@ -15,12 +15,17 @@ jobs:
         script: |
           sudo apt-get install doxygen doxygen-gui graphviz
           doxygen
-        
     - task: PublishBuildArtifacts@1
       displayName: 'postprocess: project artifact'
       inputs:
         PathtoPublish: '$(Build.SourcesDirectory)/html'
         ArtifactName: 'ScriptReference'
+        publishLocation: 'Container'
+    - task: PublishBuildArtifacts@1
+      displayName: 'postprocess: project artifact'
+      inputs:
+        PathtoPublish: '$(Build.SourcesDirectory)'
+        ArtifactName: 'project'
         publishLocation: 'Container'
 
   - job: linux_build
