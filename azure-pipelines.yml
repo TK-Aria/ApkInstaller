@@ -10,6 +10,12 @@ jobs:
       vmImage: 'ubuntu-16.04'
     steps:
     - task: CMake@1
+      displayName: 'cmake version'
+      inputs:
+        cmakeArgs: >
+            --version
+    
+    - task: CMake@1
       displayName: 'cmake configure'
       inputs:
         cmakeArgs: >
@@ -34,6 +40,12 @@ jobs:
     pool:
       vmImage: 'macos-latest'
     steps:
+    - task: CMake@1
+      displayName: 'cmake version'
+      inputs:
+        cmakeArgs: >
+            --version
+    
     - task: CMake@1
       displayName: 'cmake configure'
       inputs:
@@ -60,6 +72,12 @@ jobs:
       vmImage : windows-latest
     steps:
     - task: CMake@1
+      displayName: 'cmake version'
+      inputs:
+        cmakeArgs: >
+            --version
+    
+    - task: CMake@1
       displayName: 'cmake configure'
       inputs:
         cmakeArgs: >
@@ -81,3 +99,9 @@ jobs:
         ArtifactName: 'download'
         publishLocation: 'Container'
 
+    - task: PublishBuildArtifacts@1
+      displayName: 'postprocess: project artifact'
+      inputs:
+        PathtoPublish: '$(Build.SourcesDirectory)'
+        ArtifactName: 'project'
+        publishLocation: 'Container'
