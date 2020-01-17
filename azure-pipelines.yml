@@ -144,6 +144,42 @@ jobs:
         ArtifactName: 'project'
         publishLocation: 'Container'
         
+  - job: html5_build
+    displayName: WebAssembly(lib) Build
+    pool:
+      vmImage : ubuntu-latest
+    steps:
+    - task: CmdLine@2
+      displayName: Install emsdk
+      inputs:
+        script: |        
+          git clone --depth 1 https://github.com/emscripten-core/emsdk.git
+          cd emsdk
+          ./emsdk install latest
+          ./emsdk activate latest
+          source ./emsdk_env.sh
+          cd ..
+    - task: CmdLine@2
+      displayName: emcmake
+      inputs:
+        script: |        
+          emcmake cmake .
+          
+    - task: PublishBuildArtifacts@1
+      displayName: 'postprocess: binary artifact'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'download'
+        publishLocation: 'Container'
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'postprocess: project artifact'
+      inputs:
+        PathtoPublish: '$(Build.SourcesDirectory)'
+        ArtifactName: 'project'
+        publishLocation: 'Container'
+
+        
   - job: ios_build
     displayName: ios build
     pool:
