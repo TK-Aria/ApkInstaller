@@ -5,105 +5,7 @@ trigger:
 
 jobs:
 
-  - job: doxygen_build
-    displayName: script reference build
-    pool:
-      vmImage: 'ubuntu-latest'
-    steps:
-    - task: CmdLine@2
-      inputs:
-        script: |
-          sudo apt-get install doxygen doxygen-gui graphviz
-          doxygen
-    - task: PublishBuildArtifacts@1
-      displayName: 'postprocess: project artifact'
-      inputs:
-        PathtoPublish: '$(Build.SourcesDirectory)/html'
-        ArtifactName: 'ScriptReference'
-        publishLocation: 'Container'
-    - task: PublishBuildArtifacts@1
-      displayName: 'postprocess: project artifact'
-      inputs:
-        PathtoPublish: '$(Build.SourcesDirectory)'
-        ArtifactName: 'project'
-        publishLocation: 'Container'
-
-  - job: linux_build
-    displayName: linux build
-    pool:
-      vmImage: 'ubuntu-latest'
-    steps:
-    - task: CMake@1
-      displayName: 'cmake version'
-      inputs:
-        cmakeArgs: >
-            --version
-    
-    - task: CMake@1
-      displayName: 'cmake configure'
-      inputs:
-        cmakeArgs: >
-            -DCMAKE_INSTALL_PREFIX=$(Build.ArtifactStagingDirectory)
-            $(Build.SourcesDirectory)
-    - task: CMake@1
-      displayName: 'cmake install'
-      inputs:
-        cmakeArgs: >
-             --build ./
-             --target install
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact: download'
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'download'
-        publishLocation: 'Container'
-        
-    - task: PublishBuildArtifacts@1
-      displayName: 'postprocess: project artifact'
-      inputs:
-        PathtoPublish: '$(Build.SourcesDirectory)'
-        ArtifactName: 'project'
-        publishLocation: 'Container'
-
-
-  - job: macos_build
-    displayName: macos build
-    pool:
-      vmImage: 'macos-latest'
-    steps:
-    - task: CMake@1
-      displayName: 'cmake version'
-      inputs:
-        cmakeArgs: >
-            --version
-    
-    - task: CMake@1
-      displayName: 'cmake configure'
-      inputs:
-        cmakeArgs: >
-            -DCMAKE_INSTALL_PREFIX=$(Build.ArtifactStagingDirectory)
-            $(Build.SourcesDirectory)
-    - task: CMake@1
-      displayName: 'cmake install'
-      inputs:
-        cmakeArgs: >
-             --build ./
-             --target install
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact: download'
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'download'
-        publishLocation: 'Container'
-        
-    - task: PublishBuildArtifacts@1
-      displayName: 'postprocess: project artifact'
-      inputs:
-        PathtoPublish: '$(Build.SourcesDirectory)'
-        ArtifactName: 'project'
-        publishLocation: 'Container'
-
-
+  # Windows
   - job: windows_build
     displayName: windows build
     pool:
@@ -143,7 +45,84 @@ jobs:
         PathtoPublish: '$(Build.SourcesDirectory)'
         ArtifactName: 'project'
         publishLocation: 'Container'
+
+  # MacOS
+  - job: macos_build
+    displayName: macos build
+    pool:
+      vmImage: 'macos-latest'
+    steps:
+    - task: CMake@1
+      displayName: 'cmake version'
+      inputs:
+        cmakeArgs: >
+            --version
+    
+    - task: CMake@1
+      displayName: 'cmake configure'
+      inputs:
+        cmakeArgs: >
+            -DCMAKE_INSTALL_PREFIX=$(Build.ArtifactStagingDirectory)
+            $(Build.SourcesDirectory)
+    - task: CMake@1
+      displayName: 'cmake install'
+      inputs:
+        cmakeArgs: >
+             --build ./
+             --target install
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: download'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'download'
+        publishLocation: 'Container'
         
+    - task: PublishBuildArtifacts@1
+      displayName: 'postprocess: project artifact'
+      inputs:
+        PathtoPublish: '$(Build.SourcesDirectory)'
+        ArtifactName: 'project'
+        publishLocation: 'Container'
+        
+  # Linux
+  - job: linux_build
+    displayName: linux build
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: CMake@1
+      displayName: 'cmake version'
+      inputs:
+        cmakeArgs: >
+            --version
+    
+    - task: CMake@1
+      displayName: 'cmake configure'
+      inputs:
+        cmakeArgs: >
+            -DCMAKE_INSTALL_PREFIX=$(Build.ArtifactStagingDirectory)
+            $(Build.SourcesDirectory)
+    - task: CMake@1
+      displayName: 'cmake install'
+      inputs:
+        cmakeArgs: >
+             --build ./
+             --target install
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: download'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'download'
+        publishLocation: 'Container'
+        
+    - task: PublishBuildArtifacts@1
+      displayName: 'postprocess: project artifact'
+      inputs:
+        PathtoPublish: '$(Build.SourcesDirectory)'
+        ArtifactName: 'project'
+        publishLocation: 'Container'
+        
+  # HTML5
   - job: html5_build
     displayName: WebAssembly(lib) Build
     pool:
@@ -179,6 +158,49 @@ jobs:
         ArtifactName: 'project'
         publishLocation: 'Container'
 
+  # HTML5 MacOS
+  - job: html5_build_mac
+    displayName: WebAssembly(lib) Build (MacOS)
+    pool:
+      vmImage : macos-latest
+    steps:
+    - task: CmdLine@2
+      displayName: Install Brew
+      inputs:
+        script: | 
+          # https://qiita.com/pypypyo14/items/4bf3b8bd511b6e93c9f9
+          xcode-select --install -y
+          /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+          
+    - task: CmdLine@2
+      displayName: Install emsdk
+      inputs:
+        script: | 
+          git clone --depth 1 https://github.com/emscripten-core/emsdk.git
+          cd emsdk
+          ./emsdk install latest
+          ./emsdk activate latest
+          source ./emsdk_env.sh
+          cd ..
+    - task: CmdLine@2
+      displayName: emcmake
+      inputs:
+        script: |        
+          emcmake cmake .
+          
+    - task: PublishBuildArtifacts@1
+      displayName: 'postprocess: binary artifact'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'download'
+        publishLocation: 'Container'
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'postprocess: project artifact'
+      inputs:
+        PathtoPublish: '$(Build.SourcesDirectory)'
+        ArtifactName: 'project'
+        publishLocation: 'Container'
         
   - job: ios_build
     displayName: ios build
@@ -199,3 +221,27 @@ jobs:
       inputs:
         script: |
           echo feature supported android
+          
+  - job: doxygen_build
+    displayName: script reference build
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: CmdLine@2
+      inputs:
+        script: |
+          sudo apt-get install doxygen doxygen-gui graphviz
+          doxygen
+    - task: PublishBuildArtifacts@1
+      displayName: 'postprocess: project artifact'
+      inputs:
+        PathtoPublish: '$(Build.SourcesDirectory)/html'
+        ArtifactName: 'ScriptReference'
+        publishLocation: 'Container'
+    - task: PublishBuildArtifacts@1
+      displayName: 'postprocess: project artifact'
+      inputs:
+        PathtoPublish: '$(Build.SourcesDirectory)'
+        ArtifactName: 'project'
+        publishLocation: 'Container'
+
