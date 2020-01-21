@@ -202,6 +202,7 @@ jobs:
         ArtifactName: 'project'
         publishLocation: 'Container'
         
+  # iOS 
   - job: ios_build
     displayName: ios build
     pool:
@@ -212,6 +213,7 @@ jobs:
         script: |
           echo feature supported ios
   
+  # Android
   - job: android_build
     displayName: android build
     pool:
@@ -222,12 +224,18 @@ jobs:
         script: |
           echo feature supported android
           
+  # Doxygen
   - job: doxygen_build
     displayName: script reference build
     pool:
       vmImage: 'ubuntu-latest'
     steps:
+    - checkout: self
+      fetchDepth: 1
+      submodule: recursive
+      
     - task: CmdLine@2
+      displayName: Doxygen
       inputs:
         script: |
           sudo apt-get install doxygen doxygen-gui graphviz
